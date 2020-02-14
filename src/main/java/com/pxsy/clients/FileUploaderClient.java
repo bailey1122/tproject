@@ -31,21 +31,29 @@ public class FileUploaderClient {
             ftpClient.connect(server, port);
             ftpClient.login(user, pass);
             ftpClient.enterLocalPassiveMode();
-
+            // determines a file type for the file transfer.
+            // It's set to binary type in order to work with any files
             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
             File localFile = new File(UPLOADING_DIR + fileName);
 
             String remoteFile = fileName;
+            // stores a file by providing an InputStream of the local file
             InputStream inputStream = new FileInputStream(localFile);
-
-            System.out.println("Start uploading first file");
+            // transfers a file. It doesn't care how the bytes are transferred from
+            // the local file to the remote one
             boolean done = ftpClient.storeFile(remoteFile, inputStream);
             LOGGER.warn("Closing an input stream");
             // close a connection
             inputStream.close();
             if (done) {
+                LOGGER.info("The file is uploaded successfully to a server");
                 System.out.println("The file is uploaded successfully.");
+            }
+            boolean completed = ftpClient.completePendingCommand();
+            if (completed) {
+                LOGGER.info("Transaction completed successfully");
+                System.out.println("The second file is uploaded successfully.");
             }
         } catch (IOException ex) {
             // we'll get an java.net.ConnectException because there's no connection available
