@@ -5,6 +5,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FilesForFolder {
 
@@ -14,7 +15,7 @@ public class FilesForFolder {
     public List<String> listFilesForFolder(final File folder) {
         LOGGER.info("Listing files for a folder");
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : folder.listFiles()) {
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
             if (fileEntry.isDirectory()) {
                 LOGGER.info("Iterating a folder");
                 // gets to a root folder
