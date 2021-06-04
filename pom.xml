@@ -10,7 +10,7 @@
 
     <properties>
         <springframework.boot.version>2.2.1.RELEASE</springframework.boot.version>
-        <httpcomponents.version>4.0</httpcomponents.version>
+        <httpcomponents.version>4.5.13</httpcomponents.version>
         <commons.net.version>3.6</commons.net.version>
         <kafka.version>2.4.1.RELEASE</kafka.version>
         <jasper.version>6.0.53</jasper.version>
